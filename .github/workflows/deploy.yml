@@ -53,7 +53,9 @@ jobs:
         run: ./gradlew wasmJsBrowserDistribution --no-configuration-cache
 
       - name: Move assembled sample app to docs folder
-        run: cp -r ./sample/build/dist/wasmJs/productionExecutable/ ./dist/
+        run: |
+          mkdir ./dist
+          cp -r ./app/build/dist/wasmJs/productionExecutable/ ./dist/
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
