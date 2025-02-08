@@ -31,7 +31,7 @@ private val Montserrat
 val FontFamily.Companion.Montserrat @Composable get() = pro.respawn.meetingcost.ui.theme.Montserrat
 val FontFamily.Companion.Comfortaa @Composable get() = pro.respawn.meetingcost.ui.theme.Comfortaa
 
-private const val FontFeatures = "dlig, liga, kern, zero, locl, size"
+private val FontFeatures = if (BuildFlags.platform == Platform.Web) null else "dlig, liga, kern, zero, locl, size"
 
 @Composable
 internal fun rememberAppTypography(): Typography {
