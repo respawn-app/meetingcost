@@ -1,59 +1,48 @@
 [versions]
-activity = "1.10.0-rc01"
+activity = "1.10.0"
 # @pin
 #noinspection GradleDependency - must match jb-lifecycle
 androidx-lifecycle = "2.8.7"
-compose = "1.7.3"
+apiresult = "2.1.0"
+compose = "1.8.0-alpha02"
 composeDetektPlugin = "1.4.0"
 core-ktx = "1.13.1"
 coroutines = "1.10.1"
 datetime = "0.6.1"
+decompose = "3.2.2"
 detekt = "1.23.7"
 dokka = "2.0.0"
-essenty = "2.4.0"
+essenty = "2.5.0-beta01"
+flowmvi = "3.1.0"
 fragment = "1.8.5"
-gradleAndroid = "8.8.0-rc02"
+gradleAndroid = "8.9.0-rc01"
 junit = "4.13.2"
-kotest = "6.0.0.M1"
+kmputils = "1.5.0"
+kodein = "7.25.0"
+kotest = "6.0.0.M2"
 # @pin
-kotlin = "2.1.0"
+kotlin = "2.1.20-Beta2"
 kotlin-browser = "0.3"
 kotlin-collections = "0.3.8"
 kotlin-io = "0.6.0"
-kotlinx-atomicfu = "0.26.1"
+kotlinx-atomicfu = "0.27.0"
 ktor = "3.0.3"
 lifecycle = "2.8.4"
-serialization = "1.8.0-RC"
+okio = "3.9.0"
+serialization = "1.8.0"
+splashscreen = "1.1.0-rc01"
 turbine = "1.2.0"
 versionCatalogUpdatePlugin = "0.8.5"
-decompose = "3.2.2"
-apiresult = "2.0.0"
-koin = "4.0.0"
-kmputils = "1.4.4"
-okio = "3.9.0"
-splashscreen = "1.1.0-rc01"
-flowmvi = "3.1.0"
-kodein = "7.25.0"
 
 [libraries]
-decompose = { module = "com.arkivanov.decompose:decompose", version.ref = "decompose" }
-decompose-compose = { module = "com.arkivanov.decompose:extensions-compose", version.ref = "decompose" }
-kodein = { module = "org.kodein.di:kodein-di", version.ref = "kodein" }
-kodein-android = { module = "org.kodein.di:kodein-di-framework-android-x", version.ref = "kodein" }
-kodein-compose = { module = "org.kodein.di:kodein-di-framework-compose", version.ref = "kodein" }
-kodein-config = { module = "org.kodein.di:kodein-di-conf", version.ref = "kodein" }
-kmputils-common = { module = "pro.respawn.kmmutils:common", version.ref = "kmputils" }
-kmputils-compose = { module = "pro.respawn.kmmutils:compose", version.ref = "kmputils" }
-kmputils-coroutines = { module = "pro.respawn.kmmutils:coroutines", version.ref = "kmputils" }
-kmputils-datetime = { module = "pro.respawn.kmmutils:datetime", version.ref = "kmputils" }
-kmputils-inputforms = { module = "pro.respawn.kmmutils:inputforms", version.ref = "kmputils" }
-apiresult = { module = "pro.respawn.apiresult:core", version.ref = "apiresult" }
-androidx-splashscreen = { module = "androidx.core:core-splashscreen", version.ref = "splashscreen" }
-
 android-gradle = { module = "com.android.tools.build:gradle", version.ref = "gradleAndroid" }
 androidx-activity = { module = "androidx.activity:activity-ktx", version.ref = "activity" }
 androidx-fragment = { module = "androidx.fragment:fragment-ktx", version.ref = "fragment" }
+androidx-splashscreen = { module = "androidx.core:core-splashscreen", version.ref = "splashscreen" }
+apiresult = { module = "pro.respawn.apiresult:core", version.ref = "apiresult" }
 compose-activity = { module = "androidx.activity:activity-compose", version.ref = "activity" }
+decompose = { module = "com.arkivanov.decompose:decompose", version.ref = "decompose" }
+decompose-compose = { module = "com.arkivanov.decompose:extensions-compose", version.ref = "decompose" }
 detekt-compose = { module = "ru.kode:detekt-rules-compose", version.ref = "composeDetektPlugin" }
 detekt-formatting = { module = "io.gitlab.arturbosch.detekt:detekt-formatting", version.ref = "detekt" }
 detekt-gradle = { module = "io.gitlab.arturbosch.detekt:detekt-gradle-plugin", version.ref = "detekt" }
@@ -64,7 +53,24 @@ essenty-instancekeeper = { module = "com.arkivanov.essenty:instance-keeper", ver
 essenty-lifecycle = { module = "com.arkivanov.essenty:lifecycle", version.ref = "essenty" }
 essenty-lifecycle-coroutines = { module = "com.arkivanov.essenty:lifecycle-coroutines", version.ref = "essenty" }
 essenty-statekeeper = { module = "com.arkivanov.essenty:state-keeper", version.ref = "essenty" }
+flowmvi-android = { module = "pro.respawn.flowmvi:android", version.ref = "flowmvi" }
+flowmvi-compose = { module = "pro.respawn.flowmvi:compose", version.ref = "flowmvi" }
+flowmvi-core = { module = "pro.respawn.flowmvi:core", version.ref = "flowmvi" }
+flowmvi-debugger-client = { module = "pro.respawn.flowmvi:debugger-plugin", version.ref = "flowmvi" }
+flowmvi-essenty = { module = "pro.respawn.flowmvi:essenty", version.ref = "flowmvi" }
+flowmvi-essenty-compose = { module = "pro.respawn.flowmvi:essenty-compose", version.ref = "flowmvi" }
+flowmvi-savedstate = { module = "pro.respawn.flowmvi:savedstate", version.ref = "flowmvi" }
+flowmvi-test = { module = "pro.respawn.flowmvi:test", version.ref = "flowmvi" }
 junit = { module = "junit:junit", version.ref = "junit" }
+kmputils-common = { module = "pro.respawn.kmmutils:common", version.ref = "kmputils" }
+kmputils-compose = { module = "pro.respawn.kmmutils:compose", version.ref = "kmputils" }
+kmputils-coroutines = { module = "pro.respawn.kmmutils:coroutines", version.ref = "kmputils" }
+kmputils-datetime = { module = "pro.respawn.kmmutils:datetime", version.ref = "kmputils" }
+kmputils-inputforms = { module = "pro.respawn.kmmutils:inputforms", version.ref = "kmputils" }
+kodein = { module = "org.kodein.di:kodein-di", version.ref = "kodein" }
+kodein-android = { module = "org.kodein.di:kodein-di-framework-android-x", version.ref = "kodein" }
+kodein-compose = { module = "org.kodein.di:kodein-di-framework-compose", version.ref = "kodein" }
+kodein-config = { module = "org.kodein.di:kodein-di-conf", version.ref = "kodein" }
 kotest-assertions = { module = "io.kotest:kotest-assertions-core", version.ref = "kotest" }
 kotest-framework = { module = "io.kotest:kotest-framework-engine", version.ref = "kotest" }
 kotest-junit = { module = "io.kotest:kotest-runner-junit5", version.ref = "kotest" }
@@ -99,16 +105,32 @@ lifecycle-savedstate = { module = "androidx.lifecycle:lifecycle-viewmodel-saveds
 lifecycle-viewmodel = { module = "org.jetbrains.androidx.lifecycle:lifecycle-viewmodel", version.ref = "lifecycle" }
 turbine = { module = "app.cash.turbine:turbine", version.ref = "turbine" }
 
-flowmvi-core = { module = "pro.respawn.flowmvi:core", version.ref = "flowmvi" }
-flowmvi-test = { module = "pro.respawn.flowmvi:test", version.ref = "flowmvi" }
-flowmvi-compose = { module = "pro.respawn.flowmvi:compose", version.ref = "flowmvi" }
-flowmvi-android = { module = "pro.respawn.flowmvi:android", version.ref = "flowmvi" }
-flowmvi-savedstate = { module = "pro.respawn.flowmvi:savedstate", version.ref = "flowmvi" }
-flowmvi-debugger-client = { module = "pro.respawn.flowmvi:debugger-plugin", version.ref = "flowmvi" }
-flowmvi-essenty = { module = "pro.respawn.flowmvi:essenty", version.ref = "flowmvi" }
-flowmvi-essenty-compose = { module = "pro.respawn.flowmvi:essenty-compose", version.ref = "flowmvi" }
-
 [bundles]
+essenty = [
+    "essenty-instancekeeper",
+    "essenty-lifecycle",
+    "essenty-lifecycle-coroutines",
+    "essenty-statekeeper",
+]
+flowmvi = [
+    "flowmvi-compose",
+    "flowmvi-core",
+    "flowmvi-essenty",
+    "flowmvi-essenty-compose",
+    "flowmvi-savedstate",
+]
+kmputils = [
+    "kmputils-common",
+    "kmputils-compose",
+    "kmputils-coroutines",
+    "kmputils-datetime",
+    "kmputils-inputforms",
+]
+kodein = [
+    "kodein",
+    "kodein-compose",
+    "kodein-config",
+]
 ktor-client = [
     "ktor-client-auth",
     "ktor-client-contentNegotiation",
@@ -117,7 +139,6 @@ ktor-client = [
     "ktor-client-logging",
     "ktor-serialization-json",
 ]
-
 serialization = [
     "kotlin-reflect",
     "kotlin-serialization",
@@ -132,34 +153,9 @@ unittest = [
     "kotlin-test",
     "turbine",
 ]
-flowmvi = [
-    "flowmvi-core",
-    "flowmvi-compose",
-    "flowmvi-essenty",
-    "flowmvi-essenty-compose",
-    "flowmvi-savedstate",
-    #    "flowmvi-debugger-client"
-]
-kodein = [
-    "kodein",
-    "kodein-config",
-    "kodein-compose",
-]
-kmputils = [
-    "kmputils-common",
-    "kmputils-coroutines",
-    "kmputils-datetime",
-    "kmputils-inputforms",
-    "kmputils-compose",
-]
-essenty = [
-    "essenty-instancekeeper",
-    "essenty-lifecycle-coroutines",
-    "essenty-lifecycle",
-    "essenty-statekeeper"
-]
 
 [plugins]
+android-application = { id = "com.android.application" }
 androidLibrary = { id = "com.android.library", version.ref = "gradleAndroid" }
 atomicfu = { id = "org.jetbrains.kotlinx.atomicfu", version.ref = "kotlinx-atomicfu" }
 compose = { id = "org.jetbrains.compose", version.ref = "compose" }
@@ -169,4 +165,3 @@ kotest = { id = "io.kotest.multiplatform", version.ref = "kotest" }
 kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 version-catalog-update = { id = "nl.littlerobots.version-catalog-update", version.ref = "versionCatalogUpdatePlugin" }
-android-application = { id = "com.android.application" }
