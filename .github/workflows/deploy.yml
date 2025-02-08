@@ -1,9 +1,10 @@
 on:
   push:
     branches: [ master ]
+  workflow_dispatch:
 
 concurrency:
-  group: "docs"
+  group: "deploy"
   cancel-in-progress: true
 
 permissions:
@@ -48,37 +49,11 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-konan-
 
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 23
-          cache: npm
-          cache-dependency-path: './docs/package-lock.json'
-
-      - name: Update docs/README.md
-        run: |
-          chmod -R +x ./scripts
-          ./scripts/update_readme.sh
-
-      - name: Install docs deps
-        run: cd docs && npm ci
-
-      - name: Build website
-        run: cd docs && npm run build
-
-      - name: Generate docs
-        run: ./gradlew dokkaGenerate
-
-      - name: Make javadoc dir
-        run: mkdir -p ./docs/build/javadocs
-
-      - name: Move docs to the parent docs dir
-        run: cp -r ./build/dokka/html/ ./docs/build/javadocs/
-
       - name: Create sample app distributable
         run: ./gradlew wasmJsBrowserDistribution --no-configuration-cache
 
       - name: Move assembled sample app to docs folder
-        run: cp -r ./sample/build/dist/wasmJs/productionExecutable/ ./docs/build/sample/
+        run: cp -r ./sample/build/dist/wasmJs/productionExecutable/ ./dist/
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
@@ -86,7 +61,7 @@ jobs:
       - name: Upload pages
         uses: actions/upload-pages-artifact@v3
         with:
-          path: './docs/build/'
+          path: './dist/'
 
       - name: Deploy to GitHub Pages
         id: deployment
