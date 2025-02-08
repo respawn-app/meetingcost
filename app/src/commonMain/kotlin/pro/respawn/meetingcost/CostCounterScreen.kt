@@ -44,13 +44,9 @@ import pro.respawn.meetingcost.util.formatAsTime
 @Composable
 fun CostCounterScreen() {
     val container: CostCounterContainer by rememberInstance()
-    LaunchedEffect(Unit) { container.store.start(this).awaitUntilClosed() }
     with(container.store) {
-        val state by subscribe { action ->
-            when (action) {
-                else -> TODO()
-            }
-        }
+        LaunchedEffect(this) { start(this).awaitUntilClosed() }
+        val state by subscribe()
         CostCounterScreenContent(state)
     }
 }

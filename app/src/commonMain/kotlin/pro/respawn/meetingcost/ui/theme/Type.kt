@@ -14,15 +14,22 @@ import androidx.compose.ui.text.style.LineBreak
 import androidx.compose.ui.unit.sp
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.Font
+import pro.respawn.meetingcost.BuildFlags
 import pro.respawn.meetingcost.Res
 import pro.respawn.meetingcost.comfortaa
 import pro.respawn.meetingcost.montserrat
+import pro.respawn.meetingcost.util.Platform
+import pro.respawn.meetingcost.util.platform
 
-val Comfortaa @Composable get() = Font(Res.font.comfortaa).toFontFamily()
-val Montserrat @Composable get() = Font(Res.font.montserrat).toFontFamily()
+private val Comfortaa
+    @Composable get() = if (BuildFlags.platform == Platform.Web)
+        FontFamily.Default else Font(Res.font.comfortaa).toFontFamily()
+private val Montserrat
+    @Composable get() = if (BuildFlags.platform == Platform.Web)
+        FontFamily.Default else Font(Res.font.montserrat).toFontFamily()
 
-inline val FontFamily.Companion.Montserrat @Composable get() = pro.respawn.meetingcost.ui.theme.Montserrat
-inline val FontFamily.Companion.Comfortaa @Composable get() = pro.respawn.meetingcost.ui.theme.Comfortaa
+val FontFamily.Companion.Montserrat @Composable get() = pro.respawn.meetingcost.ui.theme.Montserrat
+val FontFamily.Companion.Comfortaa @Composable get() = pro.respawn.meetingcost.ui.theme.Comfortaa
 
 private const val FontFeatures = "dlig, liga, kern, zero, locl, size"
 
