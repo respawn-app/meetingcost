@@ -49,6 +49,7 @@ kotlin {
 
     jvm("desktop")
 
+    // region disabled
     // androidTarget().compilations.all {
     //     compileTaskProvider.configure {
     //         compilerOptions {
@@ -65,6 +66,7 @@ kotlin {
     //     // yield(macosArm64())
     //     // yield(macosX64())
     // }.toList()
+    //endregion
 
     sourceSets {
         val desktopMain by getting
@@ -90,40 +92,22 @@ kotlin {
                 implementation(libs.kotlin.datetime)
                 implementation(libs.kotlin.io)
                 implementation(libs.apiresult)
-                // implementation(libs.decompose.compose)
-                // implementation(libs.decompose)
 
                 implementation(libs.bundles.serialization)
                 implementation(libs.bundles.kmputils)
                 implementation(libs.bundles.kodein)
-                implementation(libs.bundles.flowmvi)
             }
         }
-        // nativeMain.dependencies {
-        //     implementation(projects.debugger.debuggerPlugin)
-        // }
         desktopMain.dependencies {
             implementation(libs.kotlin.coroutines.swing)
             implementation(compose.desktop.currentOs)
         }
-        // androidMain.dependencies {
-        //     implementation(projects.android)
-        //     implementation(libs.view.constraintlayout)
-        //     implementation(libs.view.material)
-        //     implementation(libs.koin.android)
-        //
-        //     implementation(libs.androidx.splashscreen)
-        //
-        //     implementation(libs.compose.activity)
-        //     implementation(libs.koin.android)
-        //     implementation(libs.koin.android.compose)
-        //     implementation(libs.view.material)
-        // }
         wasmJsMain.dependencies {
 
         }
     } // sets
 }
+// region android
 // android {
 //     namespace = Config.Sample.namespace
 //     configureAndroid()
@@ -182,6 +166,8 @@ dependencies {
     // means androidDebugImplementation
     // debugImplementation(projects.debugger.debuggerPlugin)
 }
+// endregion
+
 compose {
     resources {
         packageOfResClass = Config.namespace

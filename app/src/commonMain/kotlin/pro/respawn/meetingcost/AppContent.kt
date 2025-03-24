@@ -4,4 +4,6 @@ import androidx.compose.runtime.Composable
 import pro.respawn.meetingcost.ui.theme.RespawnTheme
 
 @Composable
-fun AppContent() = RespawnTheme { CostCounterScreen() }
+fun AppContent() = RespawnTheme {
+    // TODO: Implement
+}
