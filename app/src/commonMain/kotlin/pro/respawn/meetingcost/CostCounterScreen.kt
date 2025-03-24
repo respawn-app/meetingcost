@@ -20,13 +20,13 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.text.capitalize
 import androidx.compose.ui.text.intl.Locale
 import androidx.compose.ui.unit.dp
-import org.kodein.di.compose.rememberInstance
 import pro.respawn.flowmvi.api.IntentReceiver
 import pro.respawn.flowmvi.compose.dsl.subscribe
 import pro.respawn.kmmutils.inputforms.dsl.isEmpty
@@ -43,7 +43,7 @@ import pro.respawn.meetingcost.util.formatAsTime
 
 @Composable
 fun CostCounterScreen() {
-    val container: CostCounterContainer by rememberInstance()
+    val container = remember { CostCounterContainer() }
     with(container.store) {
         LaunchedEffect(this) { start(this).awaitUntilClosed() }
         val state by subscribe()
