@@ -36,7 +36,7 @@ kotlin {
 
     @OptIn(ExperimentalWasmDsl::class)
     wasmJs {
-        moduleName = "app"
+        outputModuleName = "app"
         binaries.executable()
         browser {
             commonWebpackConfig {
@@ -93,7 +93,6 @@ kotlin {
                 // implementation(libs.decompose.compose)
                 // implementation(libs.decompose)
 
-                implementation(libs.bundles.essenty)
                 implementation(libs.bundles.serialization)
                 implementation(libs.bundles.kmputils)
                 implementation(libs.bundles.kodein)
@@ -121,7 +120,7 @@ kotlin {
         //     implementation(libs.view.material)
         // }
         wasmJsMain.dependencies {
-            implementation(libs.essenty.statekeeper)
+
         }
     } // sets
 }

@@ -1,58 +1,33 @@
 [versions]
-activity = "1.10.1"
-# @pin
-#noinspection GradleDependency - must match jb-lifecycle
-androidx-lifecycle = "2.9.0-alpha12"
 apiresult = "2.1.0"
 compose = "1.8.0-beta01"
 composeDetektPlugin = "1.4.0"
-core-ktx = "1.13.1"
 coroutines = "1.10.1"
 datetime = "0.6.2"
-decompose = "3.3.0"
 detekt = "1.23.8"
-dokka = "2.0.0"
-essenty = "2.5.0"
 flowmvi = "3.1.0"
-fragment = "1.8.6"
 gradleAndroid = "8.10.0-beta01"
-junit = "4.13.2"
 kmputils = "1.5.0"
 kodein = "7.25.0"
 kotest = "6.0.0.M2"
 # @pin
-kotlin = "2.1.20-RC"
+kotlin = "2.1.20"
 kotlin-browser = "0.3"
 kotlin-collections = "0.3.8"
 kotlin-io = "0.7.0"
 kotlinx-atomicfu = "0.27.0"
-ktor = "3.1.1"
 lifecycle = "2.8.4"
-okio = "3.9.0"
 serialization = "1.8.0"
-splashscreen = "1.2.0-beta01"
 turbine = "1.2.0"
 versionCatalogUpdatePlugin = "0.8.5"
 
 [libraries]
 android-gradle = { module = "com.android.tools.build:gradle", version.ref = "gradleAndroid" }
-androidx-activity = { module = "androidx.activity:activity-ktx", version.ref = "activity" }
-androidx-fragment = { module = "androidx.fragment:fragment-ktx", version.ref = "fragment" }
-androidx-splashscreen = { module = "androidx.core:core-splashscreen", version.ref = "splashscreen" }
 apiresult = { module = "pro.respawn.apiresult:core", version.ref = "apiresult" }
-compose-activity = { module = "androidx.activity:activity-compose", version.ref = "activity" }
-decompose = { module = "com.arkivanov.decompose:decompose", version.ref = "decompose" }
-decompose-compose = { module = "com.arkivanov.decompose:extensions-compose", version.ref = "decompose" }
 detekt-compose = { module = "ru.kode:detekt-rules-compose", version.ref = "composeDetektPlugin" }
 detekt-formatting = { module = "io.gitlab.arturbosch.detekt:detekt-formatting", version.ref = "detekt" }
 detekt-gradle = { module = "io.gitlab.arturbosch.detekt:detekt-gradle-plugin", version.ref = "detekt" }
 detekt-libraries = { module = "io.gitlab.arturbosch.detekt:detekt-rules-libraries", version.ref = "detekt" }
-dokka-android = { module = "org.jetbrains.dokka:android-documentation-plugin", version.ref = "dokka" }
-dokka-gradle = { module = "org.jetbrains.dokka:dokka-gradle-plugin", version.ref = "dokka" }
-essenty-instancekeeper = { module = "com.arkivanov.essenty:instance-keeper", version.ref = "essenty" }
-essenty-lifecycle = { module = "com.arkivanov.essenty:lifecycle", version.ref = "essenty" }
-essenty-lifecycle-coroutines = { module = "com.arkivanov.essenty:lifecycle-coroutines", version.ref = "essenty" }
-essenty-statekeeper = { module = "com.arkivanov.essenty:state-keeper", version.ref = "essenty" }
 flowmvi-android = { module = "pro.respawn.flowmvi:android", version.ref = "flowmvi" }
 flowmvi-compose = { module = "pro.respawn.flowmvi:compose", version.ref = "flowmvi" }
 flowmvi-core = { module = "pro.respawn.flowmvi:core", version.ref = "flowmvi" }
@@ -61,7 +36,6 @@ flowmvi-essenty = { module = "pro.respawn.flowmvi:essenty", version.ref = "flowm
 flowmvi-essenty-compose = { module = "pro.respawn.flowmvi:essenty-compose", version.ref = "flowmvi" }
 flowmvi-savedstate = { module = "pro.respawn.flowmvi:savedstate", version.ref = "flowmvi" }
 flowmvi-test = { module = "pro.respawn.flowmvi:test", version.ref = "flowmvi" }
-junit = { module = "junit:junit", version.ref = "junit" }
 kmputils-common = { module = "pro.respawn.kmmutils:common", version.ref = "kmputils" }
 kmputils-compose = { module = "pro.respawn.kmmutils:compose", version.ref = "kmputils" }
 kmputils-coroutines = { module = "pro.respawn.kmmutils:coroutines", version.ref = "kmputils" }
@@ -71,10 +45,6 @@ kodein = { module = "org.kodein.di:kodein-di", version.ref = "kodein" }
 kodein-android = { module = "org.kodein.di:kodein-di-framework-android-x", version.ref = "kodein" }
 kodein-compose = { module = "org.kodein.di:kodein-di-framework-compose", version.ref = "kodein" }
 kodein-config = { module = "org.kodein.di:kodein-di-conf", version.ref = "kodein" }
-kotest-assertions = { module = "io.kotest:kotest-assertions-core", version.ref = "kotest" }
-kotest-framework = { module = "io.kotest:kotest-framework-engine", version.ref = "kotest" }
-kotest-junit = { module = "io.kotest:kotest-runner-junit5", version.ref = "kotest" }
-kotest-property = { module = "io.kotest:kotest-property", version.ref = "kotest" }
 kotlin-atomicfu = { module = "org.jetbrains.kotlinx:atomicfu", version.ref = "kotlinx-atomicfu" }
 kotlin-browser = { module = "org.jetbrains.kotlinx:kotlinx-browser", version.ref = "kotlin-browser" }
 kotlin-collections = { module = "org.jetbrains.kotlinx:kotlinx-collections-immutable", version.ref = "kotlin-collections" }
@@ -85,33 +55,14 @@ kotlin-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-te
 kotlin-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "datetime" }
 kotlin-gradle = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
 kotlin-io = { module = "org.jetbrains.kotlinx:kotlinx-io-core", version.ref = "kotlin-io" }
-kotlin-reflect = { module = "org.jetbrains.kotlin:kotlin-reflect", version.ref = "kotlin" }
 kotlin-serialization = { module = "org.jetbrains.kotlinx:kotlinx-serialization-core", version.ref = "serialization" }
 kotlin-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "serialization" }
-kotlin-stdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib", version.ref = "kotlin" }
-kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test-common", version.ref = "kotlin" }
-ktor-client-auth = { module = "io.ktor:ktor-client-auth", version.ref = "ktor" }
-ktor-client-contentNegotiation = { module = "io.ktor:ktor-client-content-negotiation", version.ref = "ktor" }
-ktor-client-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }
-ktor-client-encoding = { module = "io.ktor:ktor-client-encoding", version.ref = "ktor" }
-ktor-client-engine = { module = "io.ktor:ktor-client-cio", version.ref = "ktor" }
-ktor-client-logging = { module = "io.ktor:ktor-client-logging", version.ref = "ktor" }
-ktor-client-mock = { module = "io.ktor:ktor-client-mock", version.ref = "ktor" }
-ktor-client-websockets = { module = "io.ktor:ktor-client-websockets", version.ref = "ktor" }
-ktor-serialization-json = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktor" }
 lifecycle-compose = { module = "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose", version.ref = "lifecycle" }
 lifecycle-runtime = { module = "org.jetbrains.androidx.lifecycle:lifecycle-runtime", version.ref = "lifecycle" }
-lifecycle-savedstate = { module = "androidx.lifecycle:lifecycle-viewmodel-savedstate", version.ref = "androidx-lifecycle" }
 lifecycle-viewmodel = { module = "org.jetbrains.androidx.lifecycle:lifecycle-viewmodel", version.ref = "lifecycle" }
 turbine = { module = "app.cash.turbine:turbine", version.ref = "turbine" }
 
 [bundles]
-essenty = [
-    "essenty-instancekeeper",
-    "essenty-lifecycle",
-    "essenty-lifecycle-coroutines",
-    "essenty-statekeeper",
-]
 flowmvi = [
     "flowmvi-compose",
     "flowmvi-core",
@@ -131,27 +82,9 @@ kodein = [
     "kodein-compose",
     "kodein-config",
 ]
-ktor-client = [
-    "ktor-client-auth",
-    "ktor-client-contentNegotiation",
-    "ktor-client-core",
-    "ktor-client-encoding",
-    "ktor-client-logging",
-    "ktor-serialization-json",
-]
 serialization = [
-    "kotlin-reflect",
     "kotlin-serialization",
     "kotlin-serialization-json",
-]
-unittest = [
-    "kotest-assertions",
-    "kotest-framework",
-    "kotest-property",
-    "kotlin-coroutines-test",
-    "kotlin-reflect",
-    "kotlin-test",
-    "turbine",
 ]
 
 [plugins]
