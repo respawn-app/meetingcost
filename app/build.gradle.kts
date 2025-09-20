@@ -87,7 +87,11 @@ kotlin {
                 implementation(compose.animation)
                 implementation(compose.animationGraphics)
                 implementation(compose.ui)
+                implementation(compose.uiUtil)
                 implementation(compose.components.resources)
+                implementation(compose.components.uiToolingPreview)
+                implementation(libs.flowmvi.core)
+                implementation(libs.flowmvi.compose)
 
                 implementation(libs.kotlin.datetime)
                 implementation(libs.kotlin.io)
@@ -101,6 +105,7 @@ kotlin {
         desktopMain.dependencies {
             implementation(libs.kotlin.coroutines.swing)
             implementation(compose.desktop.currentOs)
+            implementation(compose.uiTooling)
         }
         wasmJsMain.dependencies {
 
