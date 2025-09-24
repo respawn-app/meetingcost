@@ -5,7 +5,7 @@ composeDetektPlugin = "1.4.0"
 coroutines = "1.10.2"
 datetime = "0.7.1"
 detekt = "1.23.8"
-flowmvi = "3.1.0"
+flowmvi = "3.2.0"
 gradleAndroid = "8.13.0"
 kmputils = "1.7.0"
 kodein = "7.26.1"
@@ -27,14 +27,6 @@ detekt-compose = { module = "ru.kode:detekt-rules-compose", version.ref = "compo
 detekt-formatting = { module = "io.gitlab.arturbosch.detekt:detekt-formatting", version.ref = "detekt" }
 detekt-gradle = { module = "io.gitlab.arturbosch.detekt:detekt-gradle-plugin", version.ref = "detekt" }
 detekt-libraries = { module = "io.gitlab.arturbosch.detekt:detekt-rules-libraries", version.ref = "detekt" }
-flowmvi-android = { module = "pro.respawn.flowmvi:android", version.ref = "flowmvi" }
-flowmvi-compose = { module = "pro.respawn.flowmvi:compose", version.ref = "flowmvi" }
-flowmvi-core = { module = "pro.respawn.flowmvi:core", version.ref = "flowmvi" }
-flowmvi-debugger-client = { module = "pro.respawn.flowmvi:debugger-plugin", version.ref = "flowmvi" }
-flowmvi-essenty = { module = "pro.respawn.flowmvi:essenty", version.ref = "flowmvi" }
-flowmvi-essenty-compose = { module = "pro.respawn.flowmvi:essenty-compose", version.ref = "flowmvi" }
-flowmvi-savedstate = { module = "pro.respawn.flowmvi:savedstate", version.ref = "flowmvi" }
-flowmvi-test = { module = "pro.respawn.flowmvi:test", version.ref = "flowmvi" }
 kmputils-common = { module = "pro.respawn.kmmutils:common", version.ref = "kmputils" }
 kmputils-compose = { module = "pro.respawn.kmmutils:compose", version.ref = "kmputils" }
 kmputils-coroutines = { module = "pro.respawn.kmmutils:coroutines", version.ref = "kmputils" }
@@ -60,15 +52,22 @@ lifecycle-compose = { module = "org.jetbrains.androidx.lifecycle:lifecycle-runti
 lifecycle-runtime = { module = "org.jetbrains.androidx.lifecycle:lifecycle-runtime", version.ref = "lifecycle" }
 lifecycle-viewmodel = { module = "org.jetbrains.androidx.lifecycle:lifecycle-viewmodel", version.ref = "lifecycle" }
 turbine = { module = "app.cash.turbine:turbine", version.ref = "turbine" }
-
+# Core KMP module
+flowmvi-core = { module = "pro.respawn.flowmvi:core", version.ref = "flowmvi" }
+# Test DSL
+flowmvi-test = { module = "pro.respawn.flowmvi:test", version.ref = "flowmvi" }
+# Compose multiplatform
+flowmvi-compose = { module = "pro.respawn.flowmvi:compose", version.ref = "flowmvi" }
+# Android (common + view-based)
+flowmvi-android = { module = "pro.respawn.flowmvi:android", version.ref = "flowmvi" }
+# Multiplatform state preservation
+flowmvi-savedstate = { module = "pro.respawn.flowmvi:savedstate", version.ref = "flowmvi" }
+# Remote debugging client
+flowmvi-debugger = { module = "pro.respawn.flowmvi:debugger-plugin", version.ref = "flowmvi" }
+# Essenty (Decompose) integration
+flowmvi-essenty = { module = "pro.respawn.flowmvi:essenty", version.ref = "flowmvi" }
+flowmvi-essenty-compose = { module = "pro.respawn.flowmvi:essenty-compose", version.ref = "flowmvi" }
 [bundles]
-flowmvi = [
-    "flowmvi-compose",
-    "flowmvi-core",
-    "flowmvi-essenty",
-    "flowmvi-essenty-compose",
-    "flowmvi-savedstate",
-]
 kmputils = [
     "kmputils-common",
     "kmputils-compose",

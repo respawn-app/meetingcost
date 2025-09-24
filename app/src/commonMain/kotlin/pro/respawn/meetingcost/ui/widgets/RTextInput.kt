@@ -10,8 +10,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.requiredSize
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Clear
 import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.MaterialTheme
@@ -28,6 +26,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
+import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.focus.FocusDirection
 import androidx.compose.ui.focus.FocusManager
 import androidx.compose.ui.focus.FocusRequester
@@ -44,9 +43,11 @@ import kotlinx.coroutines.delay
 import pro.respawn.kmmutils.compose.bringIntoViewOnFocus
 import pro.respawn.kmmutils.compose.modifier.thenIfNotNull
 import pro.respawn.kmmutils.inputforms.Input
-import pro.respawn.kmmutils.inputforms.Input.*
+import pro.respawn.kmmutils.inputforms.Input.Invalid
 import pro.respawn.kmmutils.inputforms.dsl.isEmptyValue
 import pro.respawn.kmmutils.inputforms.dsl.isInvalid
+import pro.respawn.meetingcost.ui.icons.Icons
+import pro.respawn.meetingcost.ui.icons.Plus
 import pro.respawn.meetingcost.ui.theme.Opacity
 import pro.respawn.meetingcost.ui.theme.Size
 
@@ -173,12 +174,12 @@ fun ClearFieldIcon(
 ) = AnimatedVisibility(visible = !input.isEmptyValue) {
     val focusManager = LocalFocusManager.current
     RIcon(
-        icon = Icons.Default.Clear,
+        icon = Icons.Plus,
         onClick = {
             focusManager.clearFocus(hideKeyboard)
             onClear()
         },
-        modifier = Modifier.requiredSize(Size.icon),
+        modifier = Modifier.requiredSize(Size.icon).rotate(degrees = 45f),
         enabled = !input.isEmptyValue && enabled,
     )
 }

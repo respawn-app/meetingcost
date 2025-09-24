@@ -1,4 +1,4 @@
-package pro.respawn.meetingcost
+package pro.respawn.meetingcost.ui.screens.costcounter
 
 import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.layout.Arrangement
@@ -6,12 +6,11 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.widthIn
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Done
-import androidx.compose.material.icons.filled.PlayArrow
-import androidx.compose.material.icons.filled.Refresh
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.FabPosition
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.MaterialTheme
@@ -27,13 +26,16 @@ import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.text.capitalize
 import androidx.compose.ui.text.intl.Locale
 import androidx.compose.ui.unit.dp
+import org.jetbrains.compose.ui.tooling.preview.Preview
 import pro.respawn.flowmvi.api.IntentReceiver
 import pro.respawn.flowmvi.compose.dsl.subscribe
+import pro.respawn.flowmvi.compose.preview.EmptyReceiver
 import pro.respawn.kmmutils.inputforms.dsl.isEmpty
 import pro.respawn.kmmutils.inputforms.dsl.isValid
-import pro.respawn.meetingcost.CostCounterIntent.ChangedClientName
-import pro.respawn.meetingcost.CostCounterIntent.ClickedSave
-import pro.respawn.meetingcost.CostCounterState.DisplayingResult
+import pro.respawn.meetingcost.ui.icons.Done
+import pro.respawn.meetingcost.ui.icons.Icons
+import pro.respawn.meetingcost.ui.icons.PlayArrow
+import pro.respawn.meetingcost.ui.icons.Refresh
 import pro.respawn.meetingcost.ui.theme.Opacity
 import pro.respawn.meetingcost.ui.widgets.RIcon
 import pro.respawn.meetingcost.ui.widgets.RTextInput
@@ -42,10 +44,13 @@ import pro.respawn.meetingcost.ui.widgets.TypeCrossfade
 import pro.respawn.meetingcost.util.formatAsTime
 
 @Composable
-fun CostCounterScreen() {
+internal fun CostCounterScreen(
+) {
     val container = remember { CostCounterContainer() }
     with(container.store) {
-        LaunchedEffect(this) { start(this).awaitUntilClosed() }
+        LaunchedEffect(Unit) {
+            container.store.start(this).awaitUntilClosed()
+        }
         val state by subscribe()
         CostCounterScreenContent(state)
     }
@@ -58,13 +63,13 @@ private fun IntentReceiver<CostCounterIntent>.CostCounterScreenContent(
     floatingActionButtonPosition = FabPosition.Center,
     floatingActionButton = {
         FloatingActionButton(
-            onClick = { intent(ClickedSave) },
+            onClick = { intent(CostCounterIntent.ClickedSave) },
         ) {
             val icon = when (state) {
-                is DisplayingResult,
-                is CostCounterState.Error -> Icons.Default.Refresh
-                is CostCounterState.Ongoing -> Icons.Default.Done
-                is CostCounterState.Preparing -> Icons.Default.PlayArrow
+                is CostCounterState.DisplayingResult,
+                is CostCounterState.Error -> Icons.Refresh
+                is CostCounterState.Ongoing -> Icons.Done
+                is CostCounterState.Preparing -> Icons.PlayArrow
             }
             RIcon(icon)
         }
@@ -75,11 +80,11 @@ private fun IntentReceiver<CostCounterIntent>.CostCounterScreenContent(
             is CostCounterState.Error -> Column(
                 verticalArrangement = Arrangement.Center,
                 horizontalAlignment = Alignment.CenterHorizontally,
-                modifier = Modifier.widthIn(max = 600.dp)
+                modifier = Modifier.widthIn(max = 600.dp).heightIn(max = 400.dp).verticalScroll(rememberScrollState())
             ) {
                 Text("Error:\n${e?.stackTraceToString()}")
             }
-            is DisplayingResult -> Column(
+            is CostCounterState.DisplayingResult -> Column(
                 verticalArrangement = Arrangement.Center,
                 horizontalAlignment = Alignment.CenterHorizontally,
                 modifier = Modifier.widthIn(max = 600.dp)
@@ -100,19 +105,19 @@ private fun IntentReceiver<CostCounterIntent>.CostCounterScreenContent(
             ) {
                 RTextInput(
                     input = settings.averageHourlyRate,
-                    onTextChange = { intent(CostCounterIntent.ChangedRate(it)) },
+                    onTextChange = { intent(CostCounterIntent.ChangedAverageHourlyRate(it)) },
                     label = "What's the average hourly rate?"
                 )
                 Spacer(modifier = Modifier.height(32.dp))
                 RTextInput(
                     input = settings.memberCount,
-                    onTextChange = { intent(CostCounterIntent.ChangedMembers(it)) },
+                    onTextChange = { intent(CostCounterIntent.ChangedMemberCount(it)) },
                     label = "How many members does this meeting have?"
                 )
                 Spacer(modifier = Modifier.height(32.dp))
                 RTextInput(
                     input = settings.clientName,
-                    onTextChange = { intent(ChangedClientName(it)) },
+                    onTextChange = { intent(CostCounterIntent.ChangedClientName(it)) },
                     label = "Who pays for this meeting?"
                 )
                 Spacer(modifier = Modifier.height(32.dp))
@@ -156,4 +161,10 @@ private fun IntentReceiver<CostCounterIntent>.CostCounterScreenContent(
             }
         }
     }
+}
+
+@Composable
+@Preview
+private fun CostCounterScreenPreview() = EmptyReceiver {
+    CostCounterScreenContent(CostCounterState.Preparing(Settings()))
 }

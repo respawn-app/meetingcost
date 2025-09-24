@@ -176,3 +176,5 @@ docs/javadocs/**
 **/plugin_rsa_private_key.pem
 **/.cache
 /.intellijPlatform/
+/.idea/.name
+/.idea/valkyrie_settings.xml
