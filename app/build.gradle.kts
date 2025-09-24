@@ -4,7 +4,7 @@ import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 
 plugins {
     id(libs.plugins.kotlin.multiplatform.id)
-    // id(libs.plugins.android.application.id)
+    alias(libs.plugins.android.application)
     alias(libs.plugins.compose)
     alias(libs.plugins.compose.compiler)
     alias(libs.plugins.kotlin.serialization)
@@ -50,14 +50,14 @@ kotlin {
     jvm("desktop")
 
     // region disabled
-    // androidTarget().compilations.all {
-    //     compileTaskProvider.configure {
-    //         compilerOptions {
-    //             jvmTarget = Config.jvmTarget
-    //             freeCompilerArgs.addAll(Config.jvmCompilerArgs)
-    //         }
-    //     }
-    // }
+    androidTarget().compilations.all {
+        compileTaskProvider.configure {
+            compilerOptions {
+                jvmTarget = Config.jvmTarget
+                freeCompilerArgs.addAll(Config.jvmCompilerArgs)
+            }
+        }
+    }
 
     // sequence {
     //     yield(iosX64())
@@ -71,6 +71,7 @@ kotlin {
     sourceSets {
         val desktopMain by getting
         val wasmJsMain by getting
+        val androidMain by getting
 
         all {
             languageSettings {
@@ -110,62 +111,59 @@ kotlin {
         wasmJsMain.dependencies {
 
         }
+        androidMain.dependencies {
+            implementation(libs.kotlin.coroutines.android)
+            implementation(libs.kodein.android)
+        }
     } // sets
 }
 // region android
-// android {
-//     namespace = Config.Sample.namespace
-//     configureAndroid()
-//     buildFeatures {
-//         viewBinding = true
-//         buildConfig = true
-//         compose = true
-//     }
-//     defaultConfig {
-//         compileSdk = Config.compileSdk
-//         applicationId = Config.artifactId
-//         minSdk = Config.appMinSdk
-//         targetSdk = Config.targetSdk
-//         versionCode = Config.versionCode
-//         versionName = Config.versionName
-//     }
-//     applicationVariants.all {
-//         setProperty("archivesBaseName", Config.Sample.namespace)
-//         outputs
-//             .matching { "apk" in it.outputFile.extension }
-//             .all {
-//                 this as com.android.build.gradle.internal.api.BaseVariantOutputImpl
-//                 outputFileName = "${Config.Sample.namespace}.apk"
-//             }
-//     }
-//     signingConfigs {
-//         val props by localProperties()
-//         val passwd = props["signing.password"].toString().trim()
-//         create("release") {
-//             keyAlias = "key"
-//             keyPassword = passwd
-//             storeFile = File(rootDir, "certificates/keystore.jks")
-//             storePassword = passwd.trim()
-//         }
-//     }
-//     buildTypes {
-//         debug {
-//             applicationIdSuffix = ".debug"
-//             signingConfig = signingConfigs.getByName("debug")
-//             versionNameSuffix = "-debug"
-//             isShrinkResources = Config.isMinifyEnabledDebug
-//         }
-//         release {
-//             ndk.debugSymbolLevel = "FULL"
-//             isShrinkResources = true
-//             isMinifyEnabled = true
-//             signingConfig = signingConfigs.getByName("release")
-//         }
-//     }
-//     androidResources {
-//         generateLocaleConfig = false
-//     }
-// }
+android {
+    namespace = Config.namespace
+    configureAndroid()
+    buildFeatures {
+        viewBinding = true
+        buildConfig = true
+        compose = true
+    }
+    defaultConfig {
+        compileSdk = Config.compileSdk
+        applicationId = Config.artifactId
+        minSdk = Config.appMinSdk
+        targetSdk = Config.targetSdk
+        versionCode = Config.versionCode
+        versionName = Config.versionName
+    }
+    applicationVariants.all {
+        outputs
+            .matching { "apk" in it.outputFile.extension }
+            .all {
+                this as com.android.build.gradle.internal.api.BaseVariantOutputImpl
+                outputFileName = "${Config.namespace}.apk"
+            }
+    }
+    signingConfigs {
+        create("release") {
+        }
+    }
+    buildTypes {
+        debug {
+            applicationIdSuffix = ".debug"
+            signingConfig = signingConfigs.getByName("debug")
+            versionNameSuffix = "-debug"
+            isShrinkResources = Config.isMinifyEnabledDebug
+        }
+        release {
+            ndk.debugSymbolLevel = "FULL"
+            isShrinkResources = Config.isMinifyEnabledRelease
+            isMinifyEnabled = Config.isMinifyEnabledRelease
+            signingConfig = signingConfigs.getByName("debug")
+        }
+    }
+    androidResources {
+        generateLocaleConfig = false
+    }
+}
 
 dependencies {
     // means androidDebugImplementation
@@ -178,7 +176,7 @@ compose {
         packageOfResClass = Config.namespace
         publicResClass = false
     }
-    // android { }
+    android { }
     web { }
     desktop {
         application {

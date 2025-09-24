@@ -75,7 +75,7 @@ object Config {
     const val appMinSdk = 26
     const val namespace = artifactId
     const val testRunner = "androidx.test.runner.AndroidJUnitRunner"
-    const val isMinifyEnabledRelease = false
+    const val isMinifyEnabledRelease = true
     const val isMinifyEnabledDebug = false
     const val defaultProguardFile = "proguard-android-optimize.txt"
     const val proguardFile = "proguard-rules.pro"

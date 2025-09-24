@@ -14,9 +14,7 @@ plugins {
     alias(libs.plugins.compose) apply false
     alias(libs.plugins.atomicfu) apply false
     alias(libs.plugins.compose.compiler) apply false
-    // plugins already on a classpath (conventions)
-    // alias(libs.plugins.androidApplication) apply false
-    // alias(libs.plugins.androidLibrary) apply false
+    alias(libs.plugins.android.application) apply false
     // alias(libs.plugins.kotlin.multiplatform) apply false
 }
 
@@ -96,5 +94,13 @@ rootProject.plugins.withType<YarnPlugin>().configureEach {
         yarnLockMismatchReport = YarnLockMismatchReport.WARNING // NONE | FAIL | FAIL_AFTER_BUILD
         reportNewYarnLock = true
         yarnLockAutoReplace = true
+    }
+}
+
+gradle.taskGraph.whenReady {
+    val lastTask = allTasks.lastOrNull()
+    lastTask?.doLast {
+        if (this.state.failure != null) return@doLast
+        println("✅ TASK SUCCESSFUL. Some messages suppressed by logging.level=warn")
     }
 }
