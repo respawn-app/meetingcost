@@ -14,6 +14,7 @@ import pro.respawn.flowmvi.plugins.reduce
 import pro.respawn.flowmvi.plugins.whileSubscribed
 import pro.respawn.kmmutils.inputforms.dsl.input
 import pro.respawn.meetingcost.BuildFlags
+import pro.respawn.meetingcost.system.FileManager
 import pro.respawn.meetingcost.util.debuggable
 import kotlin.time.Clock
 import kotlin.time.Duration.Companion.seconds
@@ -21,7 +22,9 @@ import kotlin.time.ExperimentalTime
 
 private typealias Ctx = PipelineContext<CostCounterState, CostCounterIntent, Nothing>
 
-internal class CostCounterContainer() : Container<CostCounterState, CostCounterIntent, Nothing> {
+internal class CostCounterContainer(
+    private val fileManager: FileManager,
+) : Container<CostCounterState, CostCounterIntent, Nothing> {
 
     override val store = store(initial = CostCounterState.Preparing(Settings())) {
         configure {

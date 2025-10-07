@@ -32,6 +32,7 @@ import pro.respawn.flowmvi.compose.dsl.subscribe
 import pro.respawn.flowmvi.compose.preview.EmptyReceiver
 import pro.respawn.kmmutils.inputforms.dsl.isEmpty
 import pro.respawn.kmmutils.inputforms.dsl.isValid
+import pro.respawn.meetingcost.system.rememberFileManager
 import pro.respawn.meetingcost.ui.icons.Done
 import pro.respawn.meetingcost.ui.icons.Icons
 import pro.respawn.meetingcost.ui.icons.PlayArrow
@@ -46,7 +47,8 @@ import pro.respawn.meetingcost.util.formatAsTime
 @Composable
 internal fun CostCounterScreen(
 ) {
-    val container = remember { CostCounterContainer() }
+    val fileManager = rememberFileManager()
+    val container = remember { CostCounterContainer(fileManager) }
     with(container.store) {
         LaunchedEffect(Unit) {
             container.store.start(this).awaitUntilClosed()
