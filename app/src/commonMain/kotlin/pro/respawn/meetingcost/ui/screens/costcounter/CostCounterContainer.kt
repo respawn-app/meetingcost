@@ -2,18 +2,26 @@
 
 package pro.respawn.meetingcost.ui.screens.costcounter
 
+import kotlinx.coroutines.NonCancellable.isActive
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.isActive
+import kotlinx.io.files.Path
+import kotlinx.serialization.builtins.serializer
 import pro.respawn.flowmvi.api.Container
 import pro.respawn.flowmvi.api.PipelineContext
+import pro.respawn.flowmvi.dsl.intent
 import pro.respawn.flowmvi.dsl.store
 import pro.respawn.flowmvi.dsl.updateState
 import pro.respawn.flowmvi.dsl.updateStateImmediate
 import pro.respawn.flowmvi.logging.PlatformStoreLogger
+import pro.respawn.flowmvi.plugins.enableLogging
 import pro.respawn.flowmvi.plugins.recover
 import pro.respawn.flowmvi.plugins.reduce
 import pro.respawn.flowmvi.plugins.whileSubscribed
+import pro.respawn.flowmvi.savedstate.plugins.serializeState
 import pro.respawn.kmmutils.inputforms.dsl.input
 import pro.respawn.meetingcost.BuildFlags
+import pro.respawn.meetingcost.analytics.analytics
 import pro.respawn.meetingcost.system.FileManager
 import pro.respawn.meetingcost.util.debuggable
 import kotlin.time.Clock
@@ -33,12 +41,18 @@ internal class CostCounterContainer(
             parallelIntents = true
             logger = PlatformStoreLogger
         }
+        enableLogging()
+        analytics()
         recover {
             updateState { CostCounterState.Error(it, this.settings) }
             null
         }
+        serializeState(
+            path = { Path(fileManager.cacheDir(), "cost_counter_state.json").toString() },
+            serializer = CostCounterState.Preparing.serializer(),
+        )
         whileSubscribed {
-            while (isActive) {
+            while (coroutineContext.isActive) {
                 updateState<CostCounterState.Ongoing, _> { copy(elapsed = Clock.System.now() - startedAt) }
                 delay(1.seconds)
             }

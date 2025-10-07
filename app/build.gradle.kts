@@ -93,6 +93,7 @@ kotlin {
                 implementation(compose.components.uiToolingPreview)
                 implementation(libs.flowmvi.core)
                 implementation(libs.flowmvi.compose)
+                implementation(libs.flowmvi.savedstate)
 
                 implementation(libs.kotlin.datetime)
                 implementation(libs.kotlin.io)

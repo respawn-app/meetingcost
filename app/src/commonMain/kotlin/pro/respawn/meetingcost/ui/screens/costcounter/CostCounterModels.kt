@@ -1,14 +1,18 @@
 @file:OptIn(ExperimentalTime::class)
+@file:UseSerializers(InputSerializer::class)
 
 package pro.respawn.meetingcost.ui.screens.costcounter
 
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.UseSerializers
 import pro.respawn.flowmvi.api.MVIIntent
 import pro.respawn.flowmvi.api.MVIState
 import pro.respawn.kmmutils.inputforms.Input
 import pro.respawn.kmmutils.inputforms.dsl.input
 import pro.respawn.kmmutils.inputforms.dsl.isValid
 import pro.respawn.kmmutils.inputforms.dsl.isValidOrEmpty
+import pro.respawn.meetingcost.analytics.AnalyticsEvent
+import pro.respawn.meetingcost.util.InputSerializer
 import kotlin.math.roundToInt
 import kotlin.time.Clock
 import kotlin.time.Duration
@@ -62,9 +66,16 @@ internal sealed interface CostCounterState : MVIState {
     }
 }
 
-internal sealed interface CostCounterIntent : MVIIntent {
-    data class ChangedClientName(val name: String) : CostCounterIntent
+internal sealed interface CostCounterIntent : MVIIntent, AnalyticsEvent {
+    data class ChangedClientName(val name: String) : CostCounterIntent {
+
+        override val event = "ChangedClientName"
+    }
+
     data class ChangedMemberCount(val count: String) : CostCounterIntent
     data class ChangedAverageHourlyRate(val rate: String) : CostCounterIntent
-    data object ClickedSave : CostCounterIntent
+    data object ClickedSave : CostCounterIntent {
+
+        override val event = "ClickedSave"
+    }
 }
