@@ -25,12 +25,12 @@ object Config {
 
     const val majorVersionName = "$majorRelease.$minorRelease.$patch"
     const val versionName = "$majorVersionName$postfix"
-    const val url = "https://github.com/respawn-app/meetingcost"
+    const val url = "https://github.com/respawn-llc/meetingcost"
     const val developerUrl = "https://respawn.pro"
     const val licenseFile = "LICENSE.txt"
     const val licenseName = "The Apache Software License, Version 2.0"
     const val licenseUrl = "https://www.apache.org/licenses/LICENSE-2.0.txt"
-    const val scmUrl = "https://github.com/respawn-app/meetingcost.git"
+    const val scmUrl = "https://github.com/respawn-llc/meetingcost.git"
     const val description =
         """Online realtime meeting cost calculator."""
     const val supportEmail = "hello@respawn.pro"
